@@ -23,7 +23,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  cubef: ^1.0.2             # Cube / Dice component
+  cubef: ^1.0.3             # Cube / Dice component
   audioplayers: ^0.10.1     # Audio player to play clicked sound
   vibration: ^1.0.1
 
@@ -58,10 +58,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Bebas 
+      fonts:
+        - asset: fonts/BebasKai.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
