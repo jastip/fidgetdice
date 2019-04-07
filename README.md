@@ -1,16 +1,12 @@
-# fidgetdice
+# FidgetDice 
 
-A new Flutter project.
+App that act like a 'fidget-cube'. Since this is only 5Kb app, only push button that I implement in each side
+
+## DEMO
+![](https://github.com/jastip/fidgetdice/blob/master/demo.gif)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+For documentation please visit my blog
+[FidgetDice: Flutter in 7 Days](https://dev.jas-tip.com/flutter-in-7-days/)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
