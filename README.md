@@ -3,7 +3,7 @@
 App that act like a 'fidget-cube'. Since this is only 5Kb app, only push button that I implement in each side
 
 ## DEMO
-![](https://github.com/jastip/fidgetdice/blob/master/demo.gif =300x600)
+<img src="https://github.com/jastip/fidgetdice/blob/master/demo.gif" width="400" height="600">
 
 ## Getting Started
 
