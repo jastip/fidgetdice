@@ -8,13 +8,15 @@ void main() => runApp(App());
 
 class Score extends StatefulWidget {
   Score({Key key}) : super(key: key);
+
   @override
   _ScoreState createState() => _ScoreState();
 }
 
 class _ScoreState extends State<Score> {
   int _counter = 0;
-  void clicked() {
+
+  void inc() {
     _counter++;
     setState(() {});
   }
@@ -24,7 +26,7 @@ class _ScoreState extends State<Score> {
     Size scr = MediaQuery.of(ctx).size;
     return Positioned(top: scr.height - 50, left: 10,
       child: Material(
-        child: Text("Count: " + _counter.toString(), style: TextStyle(color: Colors.black, fontFamily: "Bebas", fontSize: 40.0))));
+        child: Text("Count: " + _counter.toString(), style: TextStyle(fontSize: 40.0))));
   }
 }
 
@@ -36,18 +38,15 @@ class App extends StatelessWidget {
   FloatingActionButton rollbtn(Action act) {
     return FloatingActionButton(
       elevation: 0.0,
-      backgroundColor: Colors.transparent,
       foregroundColor: Colors.black,
       onPressed: 
         () => (act == Action.up) ? dcKey.currentState.rollUp() : 
           (act == Action.down) ? dcKey.currentState.rollDown() : 
-          (act == Action.left) ? dcKey.currentState.rollLeft() : 
-          dcKey.currentState.rollRight(),
+          (act == Action.left) ? dcKey.currentState.rollLeft() : dcKey.currentState.rollRight(),
       child: Icon(
         (act == Action.up) ? Icons.keyboard_arrow_up : 
         (act == Action.down) ? Icons.keyboard_arrow_down : 
-        (act == Action.left) ? Icons.keyboard_arrow_left : 
-        Icons.keyboard_arrow_right),
+        (act == Action.left) ? Icons.keyboard_arrow_left : Icons.keyboard_arrow_right),
     );
   }
 
@@ -55,9 +54,8 @@ class App extends StatelessWidget {
     Widget fbtn = Transform.scale(
       scale: 0.7,
       child: FloatingActionButton(
-        elevation: 0.5,
-        backgroundColor: Colors.black,
-        onPressed: () {scrKey.currentState.clicked(); snd.play("clk.mp3"); Vibration.vibrate(); })
+        elevation: 0.5, backgroundColor: Colors.black,
+        onPressed: () { scrKey.currentState.inc(); snd.play("clk.mp3"); Vibration.vibrate(); })
     );
 
     return Expanded(
@@ -69,14 +67,13 @@ class App extends StatelessWidget {
     );
   }
 
-  Container side(int idx) {
+  Container side(int i) {
     return Container(
       height: 160, width: 160,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
+        gradient: LinearGradient( 
+          begin: Alignment.topRight, end: Alignment.bottomLeft,
           stops: [0.1,0.5,0.7,0.9],
           colors: [Colors.black12,Colors.black26,Colors.black38,Colors.black45]),
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -84,9 +81,9 @@ class App extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          rowSide((idx == 2 || idx == 3) ? 1 : (idx == 4 || idx == 5 || idx == 6) ? 2 : 0),
-          rowSide((idx == 1 || idx == 3 || idx == 5) ? 1 : (idx == 6) ? 2 : 0),
-          rowSide((idx == 3 || idx == 2) ? 1 : (idx == 4 || idx == 5 || idx == 6) ? 2 : 0)
+          rowSide((i == 2 || i == 3) ? 1 : (i == 4 || i == 5 || i == 6) ? 2 : 0),
+          rowSide((i == 1 || i == 3 || i == 5) ? 1 : (i == 6) ? 2 : 0),
+          rowSide((i == 3 || i == 2) ? 1 : (i == 4 || i == 5 || i == 6) ? 2 : 0)
         ],
       ));
   }
@@ -95,7 +92,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext ctx) {
     Widget header = Positioned(top: 44, left: 10,
       child: Material(
-        child: Text("FIDGET DICE", style: TextStyle(color: Colors.black, fontFamily: "Bebas", fontSize: 60.0))));
+        child: Text("FIDGET DICE", style: TextStyle(fontSize: 60.0))));
 
     Cubef cubef = Cubef(key: dcKey, width: 160, height: 160,
       sides: [side(1), side(2), side(3), side(4), side(5), side(6)],
@@ -111,11 +108,7 @@ class App extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               rollbtn(Action.left),
-              Container(
-                alignment: Alignment.center,
-                width: 160, height: 160,
-                child: cubef
-              ),
+              Container(alignment: Alignment.center, width: 160, height: 160, child: cubef),
               rollbtn(Action.right)
             ]),
         ),
@@ -144,10 +137,14 @@ class App extends StatelessWidget {
       );
     }
     return MaterialApp(
-      home: Stack(
+      theme: ThemeData(
+        accentColor: Colors.transparent,
+        fontFamily: "Bebas",
+      ),
+      home: Scaffold(body: Stack(
         fit: StackFit.expand,
-        children: [Material(color: Colors.white), header] + backgnd + [content, Score(key: scrKey)]
+        children: [header] + backgnd + [content, Score(key: scrKey)]
       )
-    );
+    ));
   }
 }
